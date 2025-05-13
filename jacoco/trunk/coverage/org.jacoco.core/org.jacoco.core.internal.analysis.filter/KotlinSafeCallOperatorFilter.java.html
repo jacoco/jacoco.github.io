@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>KotlinSafeCallOperatorFilter.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">JaCoCo</a> &gt; <a href="../index.html" class="el_bundle">org.jacoco.core</a> &gt; <a href="index.source.html" class="el_package">org.jacoco.core.internal.analysis.filter</a> &gt; <span class="el_source">KotlinSafeCallOperatorFilter.java</span></div><h1>KotlinSafeCallOperatorFilter.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright (c) 2009, 2025 Mountainminds GmbH &amp; Co. KG and Contributors
+ * This program and the accompanying materials are made available under
+ * the terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ * Contributors:
+ *    Evgeny Mandrikov - initial API and implementation
+ *
+ *******************************************************************************/
+package org.jacoco.core.internal.analysis.filter;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.tree.AbstractInsnNode;
+import org.objectweb.asm.tree.JumpInsnNode;
+import org.objectweb.asm.tree.LabelNode;
+import org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm.tree.VarInsnNode;
+
+/**
+ * Filters bytecode that Kotlin compiler generates for chains of safe call
+ * operators ({@code ?.}).
+ */
+<span class="fc" id="L30">final class KotlinSafeCallOperatorFilter implements IFilter {</span>
+
+	public void filter(final MethodNode methodNode,
+			final IFilterContext context, final IFilterOutput output) {
+<span class="fc bfc" id="L34" title="All 2 branches covered.">		for (final ArrayList&lt;JumpInsnNode&gt; chain : findChains(methodNode)) {</span>
+<span class="fc" id="L35">			final AbstractInsnNode ifNonNullInstruction = chain.get(0).label</span>
+					.getPrevious();
+<span class="pc bpc" id="L37" title="1 of 4 branches missed.">			if (chain.size() == 1</span>
+					&amp;&amp; ifNonNullInstruction.getOpcode() != Opcodes.IFNONNULL) {
+<span class="nc" id="L39">				continue;</span>
+			}
+<span class="fc" id="L41">			final AbstractInsnNode nullTarget = AbstractMatcher</span>
+					.skipNonOpcodes(chain.get(0).label);
+<span class="fc bfc" id="L43" title="All 2 branches covered.">			for (final AbstractInsnNode ifNullInstruction : chain) {</span>
+<span class="fc" id="L44">				final Replacements replacements = new Replacements();</span>
+<span class="fc" id="L45">				replacements.add(ifNullInstruction, ifNullInstruction, 0);</span>
+<span class="fc" id="L46">				replacements.add(nullTarget, nullTarget, 0);</span>
+<span class="fc" id="L47">				output.replaceBranches(ifNullInstruction, replacements);</span>
+<span class="fc" id="L48">			}</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">			if (ifNonNullInstruction.getOpcode() == Opcodes.IFNONNULL) {</span>
+<span class="fc" id="L50">				final Replacements replacements = new Replacements();</span>
+<span class="fc" id="L51">				replacements.add(nullTarget, nullTarget, 0);</span>
+<span class="fc" id="L52">				replacements.add(ifNonNullInstruction, ifNonNullInstruction, 1);</span>
+<span class="fc" id="L53">				output.replaceBranches(ifNonNullInstruction, replacements);</span>
+			}
+<span class="fc" id="L55">		}</span>
+<span class="fc" id="L56">	}</span>
+
+	/**
+	 * &quot;optimized&quot; chain:
+	 *
+	 * &lt;pre&gt;
+	 * DUP
+	 * IFNULL label
+	 * ... // call 0
+	 *
+	 * ...
+	 *
+	 * DUP
+	 * IFNULL label
+	 * ... // call N
+	 *
+	 * label:
+	 * POP
+	 * &lt;/pre&gt;
+	 *
+	 * &quot;unoptimized&quot; chain:
+	 *
+	 * &lt;pre&gt;
+	 * ALOAD v0
+	 * IFNULL label
+	 * ... // call 0
+	 *
+	 * ...
+	 *
+	 * ASTORE v1
+	 * ALOAD v1
+	 * IFNULL label
+	 * ... // call N
+	 *
+	 * label:
+	 * ACONST_NULL
+	 * &lt;/pre&gt;
+	 */
+	private static Collection&lt;ArrayList&lt;JumpInsnNode&gt;&gt; findChains(
+			final MethodNode methodNode) {
+<span class="fc" id="L96">		final HashMap&lt;AbstractInsnNode, ArrayList&lt;JumpInsnNode&gt;&gt; chains = new HashMap&lt;AbstractInsnNode, ArrayList&lt;JumpInsnNode&gt;&gt;();</span>
+<span class="fc bfc" id="L97" title="All 2 branches covered.">		for (final AbstractInsnNode i : methodNode.instructions) {</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">			if (i.getOpcode() != Opcodes.IFNULL) {</span>
+<span class="fc" id="L99">				continue;</span>
+			}
+<span class="fc" id="L101">			final JumpInsnNode jump = (JumpInsnNode) i;</span>
+<span class="fc" id="L102">			final LabelNode label = jump.label;</span>
+<span class="fc" id="L103">			final AbstractInsnNode target = AbstractMatcher</span>
+					.skipNonOpcodes(label);
+<span class="fc" id="L105">			ArrayList&lt;JumpInsnNode&gt; chain = chains.get(label);</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">			if (target.getOpcode() == Opcodes.POP) {</span>
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">				if (i.getPrevious().getOpcode() != Opcodes.DUP) {</span>
+<span class="nc" id="L108">					continue;</span>
+				}
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">			} else if (target.getOpcode() == Opcodes.ACONST_NULL) {</span>
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">				if (i.getPrevious().getOpcode() != Opcodes.ALOAD) {</span>
+<span class="nc" id="L112">					continue;</span>
+				}
+<span class="fc bfc" id="L114" title="All 2 branches covered.">				if (chain != null) {</span>
+<span class="fc" id="L115">					final AbstractInsnNode p1 = i.getPrevious();</span>
+<span class="fc" id="L116">					final AbstractInsnNode p2 = p1.getPrevious();</span>
+<span class="pc bpc" id="L117" title="3 of 6 branches missed.">					if (p2 == null || p2.getOpcode() != Opcodes.ASTORE</span>
+							|| ((VarInsnNode) p1).var != ((VarInsnNode) p2).var) {
+<span class="nc" id="L119">						continue;</span>
+					}
+				}
+			} else {
+				continue;
+			}
+<span class="fc bfc" id="L125" title="All 2 branches covered.">			if (chain == null) {</span>
+<span class="fc" id="L126">				chain = new ArrayList&lt;JumpInsnNode&gt;();</span>
+<span class="fc" id="L127">				chains.put(label, chain);</span>
+			}
+<span class="fc" id="L129">			chain.add(jump);</span>
+<span class="fc" id="L130">		}</span>
+<span class="fc" id="L131">		return chains.values();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202505130346</span>Code Coverage Report for JaCoCo 0.8.14-SNAPSHOT</div></body></html>
