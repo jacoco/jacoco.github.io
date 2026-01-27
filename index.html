@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="date" content="2024-02-08 12:21:12 +0100" />
+  <link rel="stylesheet" href="book.css" type="text/css" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <title>EclEmma - Java Code Coverage for Eclipse</title>
+</head>
+<body>
+<table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+<tr>
+  <td style="padding:5px 10px 5px 10px;font-size:16pt;font-weight:bold;color:#000066;background-color:#f7f7f7;border:1px solid #a5b6c6;">
+    EclEmma <span style="color:#8998a5;">3.1.11</span>
+  </td>
+  <td style="padding:5px 10px 5px 10px;font-size:16pt;font-weight:bold;color:#8998a5;border-bottom:1px solid #a5b6c6;">
+    Java Code Coverage for Eclipse
+  </td>
+  <td style="padding:0px 0px 0px 0px;border-bottom:1px solid #a5b6c6;text-align:right">
+    <a href="https://marketplace.eclipse.org/marketplace-client-intro?mpc_install=264" title="Drag to your running Eclipse workspace to install EclEmma Java Code Coverage">
+      <img src="https://marketplace.eclipse.org/modules/custom/eclipsefdn/eclipsefdn_marketplace/images/btn-install.svg" alt="Drag to your running Eclipse workspace to install EclEmma Java Code Coverage" style="vertical-align:text-bottom; border:0px solid black" />
+    </a>
+  </td>
+</tr>
+<tr><td style="vertical-align:top;padding:20px 10px 20px 10px;background-color:#f7f7f7;border-left:1px solid #a5b6c6;border-right:1px solid #a5b6c6;border-bottom:1px solid #a5b6c6;">
+    <div class="menuhi" style="background-image:url(images/topic.gif);margin-left:0px;">
+      <a href="index.html">Overview</a> 
+    </div>
+    <div class="menu" style="background-image:url(images/container.gif);margin-left:0px;">
+      <a href="installation.html">Installation</a> 
+    </div>
+    <div class="menu" style="background-image:url(images/container.gif);margin-left:0px;">
+      <a href="userdoc/index.html">User Guide</a> 
+    </div>
+    <div class="menu" style="background-image:url(images/container.gif);margin-left:0px;">
+      <a href="support.html">Support</a> 
+    </div>
+    <div class="menu" style="background-image:url(images/topic.gif);margin-left:0px;">
+      <a href="resources.html">Resources</a> 
+    </div>
+    <div class="menu" style="background-image:url(images/container.gif);margin-left:0px;">
+      <a href="devdoc/index.html">Developer Information</a> 
+    </div>
+    <div class="menu" style="background-image:url(images/container.gif);margin-left:0px;">
+      <a href="research/index.html">Research</a> 
+    </div>
+    <div class="menu" style="background-image:url(images/topic.gif);margin-left:0px;">
+      <a href="jacoco/index.html">JaCoCo</a> 
+    </div>
+    <div class="menu" style="background-image:url(images/topic.gif);margin-left:0px;">
+      <a href="changes.html">Change Log</a> 
+    </div>
+    <div class="menu" style="background-image:url(images/topic.gif);margin-left:0px;">
+      <a href="license.html">License</a> 
+    </div>
+    <div class="menu" style="background-image:url(images/topic.gif);margin-left:0px;">
+      <a href="contact.html">Contact</a> 
+    </div>
+  <div class="menu" style="margin-top:15pt;background-image:url(images/extern.gif)">
+    <a href="https://github.com/jacoco">GitHub Home</a>
+  </div>
+  <div style="text-align:center;margin-top:0pt;">
+    <a href="http://www.eclipse.org/org/press-release/20080318_AwardsWinners.php"><img src="images/award.jpg" width="144" height="120" alt="Eclipse Community Award 2008" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt;">
+    <a href="http://www.jacoco.org/jacoco"><img src="images/jacoco.png" height="62" width="140" alt="JaCoCo" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt;">
+    <a href="http://www.sonarqube.org/"><img src="images/sonarqube.png" height="40" width="140" alt="Inspected with sonarqube" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt;padding-top:15px;border-top:1px solid #a0a0a0">
+    <a href="https://www.mtrail.ch/en/career.html"><img src="images/mtrail.png" width="140" height="200" alt="jobs at mtrail" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt">
+    <a href="http://www.javaspecialists.eu/"><img src="images/tjsn.jpg" width="140" height="140" alt="The Java Specialists' Newsletter" style="border:0px solid black" /></a>
+  </div>
+</td><td style="vertical-align:top;padding:0px 0px 5px 20px;width:90%;border-bottom:1px solid #a5b6c6;" colspan="2">
+<h1>Overview</h1><p>
+  <a href="images/screen.png"><img src="images/smallscreen.gif" alt="Screenshot" width="450" height="353" style="float:right; margin-left:10px; margin-bottom:10px; border:0px solid black" /></a>
+</p><p>
+  EclEmma is a free Java code coverage tool for
+  <a class="extern" href="http://www.eclipse.org">Eclipse</a>, available under the
+  <a class="extern" href="license.html">Eclipse Public License</a>. It brings
+  code coverage analysis directly into the Eclipse workbench:
+</p><ul>
+  <li><b>Fast develop/test cycle:</b> Launches from within the workbench like
+  JUnit test runs can directly be analyzed for code coverage.</li>
+  <li><b>Rich coverage analysis:</b> Coverage results are immediately summarized
+  and highlighted in the Java source code editors.</li>
+  <li><b>Non-invasive:</b> EclEmma does not require modifying your projects or
+  performing any other setup.</li>
+</ul><p>
+  Since version 2.0 EclEmma is based on the
+  <a href="http://www.jacoco.org/jacoco">JaCoCo</a> code
+  coverage library. The Eclipse integration has its focus on supporting the
+  individual developer in an highly interactive way. For automated builds please
+  refer to <a href="http://www.jacoco.org/jacoco/trunk/doc">JaCoCo
+  documentation</a> for
+  <a href="http://www.jacoco.org/jacoco/trunk/doc/integrations.html">integrations
+  with other tools</a>.
+</p><p>
+  <a href="installation1x.html">Originally</a> EclEmma was inspired by and
+  technically based on the great
+  <a class="extern" href="http://emma.sourceforge.net/">EMMA</a> library
+  developed by Vlad Roubtsov.
+</p><p>
+  The <a href="installation.html">update site</a> for EclEmma is
+  <b>https://update.eclemma.org/</b>. EclEmma is also available via the Eclipse
+  <a class="extern" href="https://marketplace.eclipse.org/content/eclipse-marketplace-client">Marketplace Client</a>,
+  simply search for "EclEmma".
+</p><h2>Features</h2><h3>Launching</h3><p>
+  EclEmma adds a so called <i>launch mode</i> to the Eclipse workbench. It is
+  called <i>Coverage</i> mode and works exactly like the existing <i>Run</i> and
+  <i>Debug</i> modes. The <i>Coverage</i> launch mode can be activated from the
+  <i>Run</i> menu or the workbench's toolbar:
+</p><p>
+  <img src="userdoc/images/launchtoolbar.gif" alt="Launching Toolbar" width="112" height="27" />
+</p><p>
+  Simply <a href="userdoc/launching.html">launch</a> your applications or unit
+  tests in the <i>Coverage</i> mode to collect coverage information. Currently
+  the following launch types are supported:
+</p><ul>
+  <li>Local Java application</li>
+  <li>Eclipse/RCP application</li>
+  <li>Equinox OSGi framework</li>
+  <li>JUnit test</li>
+  <li>TestNG test</li>
+  <li>JUnit plug-in test</li>
+  <li>JUnit RAP test</li>
+  <li>SWTBot test</li>
+  <li>Scala application</li>
+</ul><h3>Analysis</h3><p>
+  On request or after your target application has terminated code coverage
+  information is automatically available in the Eclipse workbench:
+</p><ul>
+  <li><b>Coverage overview:</b> The
+  <a href="userdoc/coverageview.html"><i>Coverage</i> view</a> lists coverage
+  summaries for your Java projects, allowing drill-down to method level.</li>
+  <li><b>Source highlighting:</b> The result of a coverage session is also
+  directly visible in the Java source editors. A customizable
+  <a href="userdoc/annotations.html">color code</a> highlights fully, partly and
+  not covered lines. This works for your own source code as well as for source
+  attached to instrumented external libraries.</li>
+</ul><p>
+  Additional features support analysis for your test coverage:
+</p><ul>
+  <li><b>Different counters:</b> Select whether instructions, branches, lines,
+  methods, types or cyclomatic complexity should be summarized.</li>
+  <li><b>Multiple coverage sessions:</b> Switching between coverage data from
+  multiple <a href="userdoc/sessions.html">sessions</a> is possible.</li>
+  <li><b>Merge Sessions:</b> If multiple different test runs should be considered
+  for analysis coverage sessions can easily be merged.</li>
+</ul><h3>Import/Export</h3><p>
+  While EclEmma is primarily designed for test runs and analysis within the
+  Eclipse workbench, it provides some import/export features.
+</p><ul>
+  <li><b>Execution data import:</b> A wizard allows to
+  <a href="userdoc/importexport.html">import</a> JaCoCo <code>*.exec</code>
+  execution data files from external launches.</li>
+  <li><b>Coverage report export:</b> Coverage data can be
+  <a href="userdoc/importexport.html">exported</a> in HTML, XML or CSV format or
+  as JaCoCo execution data files (<code>*.exec</code>).</li>
+</ul>
+</td></tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+<tr>
+  <td class="footer"><a href="license.html">Copyright</a> © 2006, 2017 Mountainminds GmbH &amp; Co. KG and Contributors</td>
+  <td class="footer" style="text-align:right;">
+    Validate
+    <a href="http://validator.w3.org/check?uri=http://www.eclemma.org/index.html">XHTML</a>/<a href="http://jigsaw.w3.org/css-validator/validator?uri=http://www.eclemma.org/index.html">CSS</a> ·
+    Last Modified
+    <a href="https://github.com/jacoco/work/blob/e1ffb7328d04070d5df87155c106f02bafef6775/content/index.html">2024-02-08</a> in Commit
+    <a href="https://github.com/jacoco/work/commit/e1ffb7328d04070d5df87155c106f02bafef6775">e1ffb732</a>
+  </td>
+</tr>
+</table>
+</body>
+</html>
