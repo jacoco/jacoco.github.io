@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>KotlinSMAP.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">JaCoCo</a> &gt; <a href="../index.html" class="el_bundle">org.jacoco.core</a> &gt; <a href="index.source.html" class="el_package">org.jacoco.core.internal.analysis.filter</a> &gt; <span class="el_source">KotlinSMAP.java</span></div><h1>KotlinSMAP.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright (c) 2009, 2026 Mountainminds GmbH &amp; Co. KG and Contributors
+ * This program and the accompanying materials are made available under
+ * the terms of the Eclipse Public License 2.0 which is available at
+ * https://www.eclipse.org/legal/epl-2.0
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ * Contributors:
+ *    Evgeny Mandrikov - initial API and implementation
+ *
+ *******************************************************************************/
+package org.jacoco.core.internal.analysis.filter;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Parsed representation of SourceDebugExtension attribute.
+ */
+public final class KotlinSMAP {
+
+	/**
+	 * Parsed representation of a single LineSection from SourceDebugExtension
+	 * attribute.
+	 */
+	public static final class Mapping {
+		private final String inputClassName;
+		private final int inputStartLine;
+		private final int repeatCount;
+		private final int outputStartLine;
+
+		/**
+		 * Creates a new mapping.
+		 *
+		 * @param inputClassName
+		 *            name of input class
+		 * @param inputStartLine
+		 *            starting line in input
+		 * @param repeatCount
+		 *            number of mapped lines
+		 * @param outputStartLine
+		 *            starting line in output
+		 */
+		Mapping(final String inputClassName, final int inputStartLine,
+<span class="fc" id="L52">				final int repeatCount, final int outputStartLine) {</span>
+<span class="fc" id="L53">			this.inputClassName = inputClassName;</span>
+<span class="fc" id="L54">			this.inputStartLine = inputStartLine;</span>
+<span class="fc" id="L55">			this.repeatCount = repeatCount;</span>
+<span class="fc" id="L56">			this.outputStartLine = outputStartLine;</span>
+<span class="fc" id="L57">		}</span>
+
+		/**
+		 * @return name of input class
+		 */
+		public String inputClassName() {
+<span class="fc" id="L63">			return inputClassName;</span>
+		}
+
+		/**
+		 * @return starting line in input
+		 */
+		public int inputStartLine() {
+<span class="fc" id="L70">			return inputStartLine;</span>
+		}
+
+		/**
+		 * @return number of mapped lines
+		 */
+		public int repeatCount() {
+<span class="fc" id="L77">			return repeatCount;</span>
+		}
+
+		/**
+		 * @return starting line in output
+		 */
+		public int outputStartLine() {
+<span class="fc" id="L84">			return outputStartLine;</span>
+		}
+	}
+
+<span class="fc" id="L88">	private final ArrayList&lt;Mapping&gt; mappings = new ArrayList&lt;Mapping&gt;();</span>
+
+	/**
+	 * Returns list of mappings.
+	 *
+	 * @return list of mappings
+	 */
+	public List&lt;Mapping&gt; mappings() {
+<span class="fc" id="L96">		return mappings;</span>
+	}
+
+	/**
+	 * Creates parsed representation of provided SourceDebugExtension attribute.
+	 *
+	 * @param sourceFileName
+	 *            the name of the source file from which the class with SMAP was
+	 *            compiled
+	 * @param smap
+	 *            value of SourceDebugExtension attribute to parse
+	 */
+<span class="fc" id="L108">	public KotlinSMAP(final String sourceFileName, final String smap) {</span>
+		try {
+<span class="fc" id="L110">			final BufferedReader br = new BufferedReader(</span>
+					new StringReader(smap));
+			// Header
+<span class="fc" id="L113">			expectLine(br, &quot;SMAP&quot;);</span>
+			// OutputFileName
+<span class="fc" id="L115">			expectLine(br, sourceFileName);</span>
+			// DefaultStratumId
+<span class="fc" id="L117">			expectLine(br, &quot;Kotlin&quot;);</span>
+			// StratumSection
+<span class="fc" id="L119">			expectLine(br, &quot;*S Kotlin&quot;);</span>
+			// FileSection
+<span class="fc" id="L121">			expectLine(br, &quot;*F&quot;);</span>
+<span class="fc" id="L122">			final HashMap&lt;Integer, String&gt; inputClassNames = new HashMap&lt;Integer, String&gt;();</span>
+			String line;
+<span class="fc bfc" id="L124" title="All 2 branches covered.">			while (!&quot;*L&quot;.equals(line = br.readLine())) {</span>
+<span class="fc" id="L125">				final Matcher m = FILE_INFO_PATTERN.matcher(line);</span>
+<span class="fc bfc" id="L126" title="All 2 branches covered.">				if (!m.matches()) {</span>
+<span class="fc" id="L127">					throw new IllegalStateException(</span>
+							&quot;Unexpected SMAP line: &quot; + line);
+				}
+<span class="fc" id="L130">				final int id = Integer.parseInt(m.group(1));</span>
+				// See
+				// https://github.com/JetBrains/kotlin/blob/2.0.0/compiler/backend/src/org/jetbrains/kotlin/codegen/inline/SMAP.kt#L120-L121
+				// https://github.com/JetBrains/kotlin/blob/2.0.0/compiler/backend/src/org/jetbrains/kotlin/codegen/SourceInfo.kt#L38-L41
+<span class="fc" id="L134">				final String className = br.readLine();</span>
+<span class="fc" id="L135">				inputClassNames.put(id, className);</span>
+<span class="fc" id="L136">			}</span>
+			// LineSection
+			while (true) {
+<span class="fc" id="L139">				line = br.readLine();</span>
+<span class="fc bfc" id="L140" title="All 4 branches covered.">				if (line.equals(&quot;*E&quot;) || line.equals(&quot;*S KotlinDebug&quot;)) {</span>
+<span class="fc" id="L141">					break;</span>
+				}
+<span class="fc" id="L143">				final Matcher m = LINE_INFO_PATTERN.matcher(line);</span>
+<span class="fc bfc" id="L144" title="All 2 branches covered.">				if (!m.matches()) {</span>
+<span class="fc" id="L145">					throw new IllegalStateException(</span>
+							&quot;Unexpected SMAP line: &quot; + line);
+				}
+<span class="fc" id="L148">				final int inputStartLine = Integer.parseInt(m.group(1));</span>
+<span class="fc" id="L149">				final int lineFileID = Integer</span>
+						.parseInt(m.group(2).substring(1));
+<span class="fc" id="L151">				final String repeatCountOptional = m.group(3);</span>
+<span class="fc bfc" id="L152" title="All 2 branches covered.">				final int repeatCount = repeatCountOptional != null</span>
+						? Integer.parseInt(repeatCountOptional.substring(1))
+						: 1;
+<span class="fc" id="L155">				final int outputStartLine = Integer.parseInt(m.group(4));</span>
+<span class="fc" id="L156">				mappings.add(new Mapping(inputClassNames.get(lineFileID),</span>
+						inputStartLine, repeatCount, outputStartLine));
+<span class="fc" id="L158">			}</span>
+<span class="nc" id="L159">		} catch (final IOException e) {</span>
+			// Must not happen with StringReader
+<span class="nc" id="L161">			throw new AssertionError(e);</span>
+<span class="fc" id="L162">		}</span>
+<span class="fc" id="L163">	}</span>
+
+	private static void expectLine(final BufferedReader br,
+			final String expected) throws IOException {
+<span class="fc" id="L167">		final String line = br.readLine();</span>
+<span class="fc bfc" id="L168" title="All 2 branches covered.">		if (!expected.equals(line)) {</span>
+<span class="fc" id="L169">			throw new IllegalStateException(&quot;Unexpected SMAP line: &quot; + line);</span>
+		}
+<span class="fc" id="L171">	}</span>
+
+<span class="fc" id="L173">	private static final Pattern LINE_INFO_PATTERN = Pattern.compile(&quot;&quot; //</span>
+			+ &quot;([0-9]++)&quot; // InputStartLine
+			+ &quot;(#[0-9]++)?+&quot; // LineFileID
+			+ &quot;(,[0-9]++)?+&quot; // RepeatCount
+			+ &quot;:([0-9]++)&quot; // OutputStartLine
+			+ &quot;(,[0-9]++)?+&quot; // OutputLineIncrement
+	);
+
+<span class="fc" id="L181">	private static final Pattern FILE_INFO_PATTERN = Pattern.compile(&quot;&quot; //</span>
+			+ &quot;\\+ ([0-9]++)&quot; // FileID
+			+ &quot; (.++)&quot; // FileName
+	);
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202602210714</span>Code Coverage Report for JaCoCo 0.8.15-SNAPSHOT</div></body></html>
