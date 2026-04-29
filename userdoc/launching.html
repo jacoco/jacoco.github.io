@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="date" content="2016-08-30 20:01:19 +0200" />
+  <link rel="stylesheet" href="../book.css" type="text/css" />
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+  <title>EclEmma - Launching in Coverage Mode</title>
+</head>
+<body>
+<table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+<tr>
+  <td style="padding:5px 10px 5px 10px;font-size:16pt;font-weight:bold;color:#000066;background-color:#f7f7f7;border:1px solid #a5b6c6;">
+    EclEmma <span style="color:#8998a5;">3.1.11</span>
+  </td>
+  <td style="padding:5px 10px 5px 10px;font-size:16pt;font-weight:bold;color:#8998a5;border-bottom:1px solid #a5b6c6;">
+    Java Code Coverage for Eclipse
+  </td>
+  <td style="padding:0px 0px 0px 0px;border-bottom:1px solid #a5b6c6;text-align:right">
+    <a href="https://marketplace.eclipse.org/marketplace-client-intro?mpc_install=264" title="Drag to your running Eclipse workspace to install EclEmma Java Code Coverage">
+      <img src="https://marketplace.eclipse.org/modules/custom/eclipsefdn/eclipsefdn_marketplace/images/btn-install.svg" alt="Drag to your running Eclipse workspace to install EclEmma Java Code Coverage" style="vertical-align:text-bottom; border:0px solid black" />
+    </a>
+  </td>
+</tr>
+<tr><td style="vertical-align:top;padding:20px 10px 20px 10px;background-color:#f7f7f7;border-left:1px solid #a5b6c6;border-right:1px solid #a5b6c6;border-bottom:1px solid #a5b6c6;">
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../index.html">Overview</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="../installation.html">Installation</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="index.html">User Guide</a> 
+    </div>
+    <div class="menuhi" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="launching.html">Launching in Coverage Mode</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="coverageview.html">Using the Coverage View</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="annotations.html">Source Code Annotations</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="coverageproperties.html">Coverage Properties</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="decorators.html">Decorators</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="sessions.html">Managing Coverage Sessions</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="importexport.html">Session Import and Export</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="keyboard.html">Keyboard Usage</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="preferences.html">Preferences</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="../support.html">Support</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../resources.html">Resources</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="../devdoc/index.html">Developer Information</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="../research/index.html">Research</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../jacoco/index.html">JaCoCo</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../changes.html">Change Log</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../license.html">License</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../contact.html">Contact</a> 
+    </div>
+  <div class="menu" style="margin-top:15pt;background-image:url(../images/extern.gif)">
+    <a href="https://github.com/jacoco">GitHub Home</a>
+  </div>
+  <div style="text-align:center;margin-top:0pt;">
+    <a href="http://www.eclipse.org/org/press-release/20080318_AwardsWinners.php"><img src="../images/award.jpg" width="144" height="120" alt="Eclipse Community Award 2008" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt;">
+    <a href="http://www.jacoco.org/jacoco"><img src="../images/jacoco.png" height="62" width="140" alt="JaCoCo" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt;">
+    <a href="http://www.sonarqube.org/"><img src="../images/sonarqube.png" height="40" width="140" alt="Inspected with sonarqube" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt;padding-top:15px;border-top:1px solid #a0a0a0">
+    <a href="https://www.mtrail.ch/en/career.html"><img src="../images/mtrail.png" width="140" height="200" alt="jobs at mtrail" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt">
+    <a href="http://www.javaspecialists.eu/"><img src="../images/tjsn.jpg" width="140" height="140" alt="The Java Specialists' Newsletter" style="border:0px solid black" /></a>
+  </div>
+</td><td style="vertical-align:top;padding:0px 0px 5px 20px;width:90%;border-bottom:1px solid #a5b6c6;" colspan="2">
+<h2>Launching in Coverage Mode</h2><p>
+  Eclipse allows running Java programs directly from the workbench. Programs
+  can be launched in different so called <i>launch modes</i>. In a standard
+  Eclipse installation you can launch your programs either in <i>Run</i>
+  or in <i>Debug</i> mode. EclEmma adds a new launch mode <i>Coverage</i> which
+  is available from the <i>Run</i> menu and the toolbar:
+</p><p>
+  <img src="images/launchtoolbar.gif" alt="Launching Toolbar" width="112" height="27" />
+</p><p>
+  <b>Note:</b> If the <i>Coverage</i> drop-down toolbar button is not visible
+  in your current workbench perspective, open the <i>Customize Perspective...</i>
+  dialog and enable the <i>Coverage</i> command group on the <i>Commands</i> tab.
+</p><p>
+  Currently the following launch types are supported:
+</p><ul>
+  <li>Local Java application</li>
+  <li>Eclipse/RCP application</li>
+  <li>Equinox OSGi framework</li>
+  <li>JUnit test</li>
+  <li>TestNG test</li>
+  <li>JUnit plug-in test</li>
+  <li>JUnit RAP test</li>
+  <li>SWTBot test</li>
+  <li>Scala application</li>
+</ul><p>
+  Existing launch configurations can be launched directly in <i>Coverage</i>
+  mode using default settings. As with the <i>Run</i> and <i>Debug</i> mode
+  you might also select a Java element and launch it directly from the
+  <i>Coverage As</i> context menu. If required some settings can be modified
+  in the coverage launch dialog:
+</p><p>
+  <img src="images/launchdialog.png" alt="Launch Dialog" />
+</p><p>
+  In the <i>Coverage</i> tab the Java class path entries for code coverage
+  analysis can be selected. At least one entry must be selected to run an
+  application in <i>Coverage</i> mode. The rules which class path entries are
+  selected by default can be adjusted in the
+  <a href="preferences.html">code coverage preferences</a>.
+</p><h3>Coverage Data Collection</h3><p>
+  Coverage data is collected and presented automatically when the application
+  terminates on its own. If the Java VM is killed externally, e.g. with the
+  Eclipse <i>Terminate</i> action, coverage results can not be shown. In
+  addition intermediate coverage data dumps can also be requested from any
+  process running in <i>Coverage</i> mode. Such dumps can be triggered from the
+  toolbar of the <a href="coverageview.html"><i>Coverage</i> view</a>.
+</p>
+</td></tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+<tr>
+  <td class="footer"><a href="../license.html">Copyright</a> © 2006, 2017 Mountainminds GmbH &amp; Co. KG and Contributors</td>
+  <td class="footer" style="text-align:right;">
+    Validate
+    <a href="http://validator.w3.org/check?uri=http://www.eclemma.org/userdoc/launching.html">XHTML</a>/<a href="http://jigsaw.w3.org/css-validator/validator?uri=http://www.eclemma.org/userdoc/launching.html">CSS</a> ·
+    Last Modified
+    <a href="https://github.com/jacoco/eclemma/blob/b21b8b75f4dee2391b0a1e5da0a6dc1d837aed05/org.eclipse.eclemma.doc/pages/launching.html">2016-08-30</a> in Commit
+    <a href="https://github.com/jacoco/eclemma/commit/b21b8b75f4dee2391b0a1e5da0a6dc1d837aed05">b21b8b75</a>
+  </td>
+</tr>
+</table>
+</body>
+</html>
