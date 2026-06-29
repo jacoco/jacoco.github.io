@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>RemoteControlReader.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">JaCoCo</a> &gt; <a href="../index.html" class="el_bundle">org.jacoco.core</a> &gt; <a href="index.source.html" class="el_package">org.jacoco.core.runtime</a> &gt; <span class="el_source">RemoteControlReader.java</span></div><h1>RemoteControlReader.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright (c) 2009, 2026 Mountainminds GmbH &amp; Co. KG and Contributors
+ * This program and the accompanying materials are made available under
+ * the terms of the Eclipse Public License 2.0 which is available at
+ * https://www.eclipse.org/legal/epl-2.0
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ * Contributors:
+ *    Marc R. Hoffmann - initial API and implementation
+ *
+ *******************************************************************************/
+package org.jacoco.core.runtime;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.jacoco.core.data.ExecutionDataReader;
+
+/**
+ * {@link ExecutionDataReader} with commands added for runtime remote control.
+ */
+public class RemoteControlReader extends ExecutionDataReader {
+
+	private IRemoteCommandVisitor remoteCommandVisitor;
+
+	/**
+	 * Creates a new reader based on the given input stream.
+	 *
+	 * Depending on the nature of the underlying stream input should be buffered
+	 * as most data is read in single bytes.
+	 *
+	 * Should be buffered when used to read execution data from
+	 * {@link java.net.Socket#getInputStream()}.
+	 *
+	 * Should not be buffered when used only for commands because they are short
+	 * and this will merely add memory overhead.
+	 *
+	 * @param input
+	 *            input stream to read commands from
+	 * @throws IOException
+	 *             if the stream does not have a valid header
+	 */
+	public RemoteControlReader(final InputStream input) throws IOException {
+<span class="fc" id="L45">		super(input);</span>
+<span class="fc" id="L46">	}</span>
+
+	@Override
+	protected boolean readBlock(final byte blockid) throws IOException {
+<span class="fc bfc" id="L50" title="All 3 branches covered.">		switch (blockid) {</span>
+		case RemoteControlWriter.BLOCK_CMDDUMP:
+<span class="fc" id="L52">			readDumpCommand();</span>
+<span class="fc" id="L53">			return true;</span>
+		case RemoteControlWriter.BLOCK_CMDOK:
+<span class="fc" id="L55">			return false;</span>
+		default:
+<span class="fc" id="L57">			return super.readBlock(blockid);</span>
+		}
+	}
+
+	/**
+	 * Sets a listener for agent commands.
+	 *
+	 * @param visitor
+	 *            visitor to retrieve agent commands
+	 */
+	public void setRemoteCommandVisitor(final IRemoteCommandVisitor visitor) {
+<span class="fc" id="L68">		this.remoteCommandVisitor = visitor;</span>
+<span class="fc" id="L69">	}</span>
+
+	private void readDumpCommand() throws IOException {
+<span class="fc bfc" id="L72" title="All 2 branches covered.">		if (remoteCommandVisitor == null) {</span>
+<span class="fc" id="L73">			throw new IOException(&quot;No remote command visitor.&quot;);</span>
+		}
+<span class="fc" id="L75">		final boolean dump = in.readBoolean();</span>
+<span class="fc" id="L76">		final boolean reset = in.readBoolean();</span>
+<span class="fc" id="L77">		remoteCommandVisitor.visitDumpCommand(dump, reset);</span>
+<span class="fc" id="L78">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.16.202606290845</span>Code Coverage Report for JaCoCo 0.8.16-SNAPSHOT</div></body></html>
