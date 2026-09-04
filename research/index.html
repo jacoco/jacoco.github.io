@@ -1,0 +1,490 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="date" content="2025-05-30 23:21:11 +0200" />
+  <link rel="stylesheet" href="../book.css" type="text/css" />
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+  <title>EclEmma - Research</title>
+</head>
+<body>
+<table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+<tr>
+  <td style="padding:5px 10px 5px 10px;font-size:16pt;font-weight:bold;color:#000066;background-color:#f7f7f7;border:1px solid #a5b6c6;">
+    EclEmma <span style="color:#8998a5;">3.1.11</span>
+  </td>
+  <td style="padding:5px 10px 5px 10px;font-size:16pt;font-weight:bold;color:#8998a5;border-bottom:1px solid #a5b6c6;">
+    Java Code Coverage for Eclipse
+  </td>
+  <td style="padding:0px 0px 0px 0px;border-bottom:1px solid #a5b6c6;text-align:right">
+    <a href="https://marketplace.eclipse.org/marketplace-client-intro?mpc_install=264" title="Drag to your running Eclipse workspace to install EclEmma Java Code Coverage">
+      <img src="https://marketplace.eclipse.org/modules/custom/eclipsefdn/eclipsefdn_marketplace/images/btn-install.svg" alt="Drag to your running Eclipse workspace to install EclEmma Java Code Coverage" style="vertical-align:text-bottom; border:0px solid black" />
+    </a>
+  </td>
+</tr>
+<tr><td style="vertical-align:top;padding:20px 10px 20px 10px;background-color:#f7f7f7;border-left:1px solid #a5b6c6;border-right:1px solid #a5b6c6;border-bottom:1px solid #a5b6c6;">
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../index.html">Overview</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="../installation.html">Installation</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="../userdoc/index.html">User Guide</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="../support.html">Support</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../resources.html">Resources</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="../devdoc/index.html">Developer Information</a> 
+    </div>
+    <div class="menuhi" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="index.html">Research</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="instrumentingosgi/index.html">Instrumenting OSGi Bundles</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../jacoco/index.html">JaCoCo</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../changes.html">Change Log</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../license.html">License</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../contact.html">Contact</a> 
+    </div>
+  <div class="menu" style="margin-top:15pt;background-image:url(../images/extern.gif)">
+    <a href="https://github.com/jacoco">GitHub Home</a>
+  </div>
+  <div style="text-align:center;margin-top:0pt;">
+    <a href="http://www.eclipse.org/org/press-release/20080318_AwardsWinners.php"><img src="../images/award.jpg" width="144" height="120" alt="Eclipse Community Award 2008" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt;">
+    <a href="http://www.jacoco.org/jacoco"><img src="../images/jacoco.png" height="62" width="140" alt="JaCoCo" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt;">
+    <a href="http://www.sonarqube.org/"><img src="../images/sonarqube.png" height="40" width="140" alt="Inspected with sonarqube" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt;padding-top:15px;border-top:1px solid #a0a0a0">
+    <a href="https://www.mtrail.ch/en/career.html"><img src="../images/mtrail.png" width="140" height="200" alt="jobs at mtrail" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt">
+    <a href="http://www.javaspecialists.eu/"><img src="../images/tjsn.jpg" width="140" height="140" alt="The Java Specialists' Newsletter" style="border:0px solid black" /></a>
+  </div>
+</td><td style="vertical-align:top;padding:0px 0px 5px 20px;width:90%;border-bottom:1px solid #a5b6c6;" colspan="2">
+<h1>Research</h1><a href="http://www.eclipsecon.org/summiteurope2007/index.php?page=detail/&amp;id=22"><img src="../images/class.jpg" alt="Talk" width="224" height="150" style="float:right; margin-left:10px; margin-bottom:10px; border:0px solid black" /></a><p>
+  This section contains – work in progress – papers about code
+  coverage techniques that are currently used by EclEmma or might be used in
+  future versions. Please feel free to discuss the papers at the
+  <a class="extern" href="https://groups.google.com/d/forum/jacoco">JaCoCo and
+  EclEmma Users</a> group.
+</p><h3>Warning</h3><p>
+  The papers in this section may not be related to the current version of
+  EclEmma. All code examples provided herein are for demonstration purposes only
+  and are completely <b>unsupported</b>. Please refer to the
+  <a href="../userdoc/index.html">user guide</a> for all questions related to
+  the current EclEmma version.
+</p><h2>Presentations</h2><h3>Devoxx UK 2025, London</h3><p>
+  <a class="extern" href="https://www.devoxx.co.uk/talk/code-coverage-mythbusters/">Code coverage MythBusters</a>
+  by Marharyta Nedzelska and Evgeny Mandrikov at
+  <a class="extern" href="https://www.devoxx.co.uk/">Devoxx UK</a>,
+  2025/05/09
+</p><ul>
+  <li><a class="extern" href="https://www.youtube.com/watch?v=XSWcYyOjqmU">Video</a></li>
+</ul><h3>JChampions 2025, Online</h3><p>
+  <a class="extern" href="https://jchampionsconf.com/speakers.html#mandrikovCard">Java, Code Coverage and their best friend - bytecode: scandals, intrigues, investigations</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://jchampionsconf.com/">JChampions</a>,
+  2025/01/28
+</p><ul>
+  <li><a class="extern" href="https://www.youtube.com/watch?v=ucIcIc1vAVU">Video</a></li>
+</ul><h3>J-Fall 2024, Ede</h3><p>
+  <a class="extern" href="https://jfall.nl/timetable/">Code coverage MythBusters</a>
+  by Marharyta Nedzelska and Evgeny Mandrikov at
+  <a class="extern" href="https://jfall.nl/">J-Fall</a>,
+  2024/11/07
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/PzFCviWPMsM">Video</a></li>
+</ul><h3>JavaCro 2024, Rovinj</h3><p>
+  <a class="extern" href="https://2024.javacro.hr/eng/Program/">Code coverage MythBusters</a>
+  by Marharyta Nedzelska and Evgeny Mandrikov at
+  <a class="extern" href="https://2024.javacro.hr/eng">JavaCro</a>,
+  2024/10/15
+</p><h3>Devoxx Morocco 2024, Marrakesh</h3><p>
+  <a class="extern" href="https://devoxx.ma/talk/?id=1612">Code coverage MythBusters</a>
+  by Marharyta Nedzelska and Evgeny Mandrikov at
+  <a class="extern" href="https://devoxx.ma/">Devoxx Morocco</a>,
+  2024/10/03
+</p><h3>BaselOne 2024, Basel</h3><p>
+  <a class="extern" href="https://baselone.org/en/featured-sessions-baselone-2024-published/">Code coverage MythBusters</a>
+  by Marharyta Nedzelska and Evgeny Mandrikov at
+  <a class="extern" href="https://baselone.org/">BaselOne</a>,
+  2024/10/17
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/e7xWqkhLH8s">Video</a></li>
+</ul><h3>droidcon 2024, Berlin</h3><p>
+  <a class="extern" href="https://berlin.droidcon.com/agenda/">The state of code coverage for Kotlin</a>
+  by Marharyta Nedzelska and Evgeny Mandrikov at
+  <a class="extern" href="https://berlin.droidcon.com/">droidcon</a>,
+  2024/07/04
+</p><ul>
+  <li><a class="extern" href="https://player.vimeo.com/video/995291147">Video</a></li>
+</ul><h3>DevBcn 2024, Barcelona</h3><p>
+  <a class="extern" href="https://www.devbcn.com/talk/601246">Code coverage MythBusters</a>
+  by Marharyta Nedzelska and Evgeny Mandrikov at
+  <a class="extern" href="https://www.devbcn.com/">DevBcn</a>,
+  2024/06/13
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/eClyMXSYskM">Video</a></li>
+</ul><h3>JNation 2024, Coimbra</h3><p>
+  <a class="extern" href="https://jnation.pt/sessions/">Code coverage MythBusters</a>
+  by Marharyta Nedzelska and Evgeny Mandrikov at
+  <a class="extern" href="https://jnation.pt/">JNation</a>,
+  2024/06/04
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/7r8a12oYgEU">Video</a></li>
+</ul><h3>jPrime 2024, Sofia</h3><p>
+  <a class="extern" href="https://jprime.io/agenda/199">Code coverage MythBusters</a>
+  by Marharyta Nedzelska and Evgeny Mandrikov at
+  <a class="extern" href="https://jprime.io/">jPrime</a>,
+  2024/05/28
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/FdRDEzN4b1E">Video</a></li>
+</ul><h3>KotlinConf 2024, Copenhagen</h3><p>
+  <a class="extern" href="https://kotlinconf.com/schedule/">The state of code coverage for Kotlin</a>
+  by Marharyta Nedzelska and Evgeny Mandrikov at
+  <a class="extern" href="https://kotlinconf.com/">KotlinConf</a>,
+  2024/05/23
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/K08BaISw27I">Video</a></li>
+</ul><h3>AndroidMakers 2024, Montrouge</h3><p>
+  <a class="extern" href="https://androidmakers.droidcon.com/agenda/">The state of code coverage for Kotlin</a>
+  by Marharyta Nedzelska and Evgeny Mandrikov at
+  <a class="extern" href="https://androidmakers.droidcon.com/">AndroidMakers</a>,
+  2024/04/25
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/WR7uYaEsfqY">Video</a></li>
+</ul><h3>YOW! Sydney 2023, Sydney</h3><p>
+  <a class="extern" href="https://yowcon.com/sydney-2023/sessions/3071/java-code-coverage-and-their-best-friend-%E2%80%94-bytecode-scandals-intrigues-investigations">Java, Code Coverage and their best friend - bytecode: scandals, intrigues, investigations</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://yowcon.com/sydney-2023">YOW! Sydney</a>,
+  2023/12/07
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/nhxcUUthnk8">Video</a></li>
+</ul><h3>YOW! Brisbane 2023, Brisbane</h3><p>
+  <a class="extern" href="https://yowcon.com/brisbane-2023/sessions/3072/java-code-coverage-and-their-best-friend-%E2%80%94-bytecode-scandals-intrigues-investigations">Java, Code Coverage and their best friend - bytecode: scandals, intrigues, investigations</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://yowcon.com/brisbane-2023">YOW! Brisbane</a>,
+  2023/12/04
+</p><h3>YOW! Melbourne 2023, Melbourne</h3><p>
+  <a class="extern" href="https://yowcon.com/melbourne-2023/sessions/3073/java-code-coverage-and-their-best-friend-%E2%80%94-bytecode-scandals-intrigues-investigations">Java, Code Coverage and their best friend - bytecode: scandals, intrigues, investigations</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://yowcon.com/melbourne-2023">YOW! Melbourne</a>,
+  2023/11/30
+</p><h3>GOTO Copenhagen 2023, Copenhagen</h3><p>
+  <a class="extern" href="https://gotocph.com/2023/sessions/2833/dynamic-constants-%E2%80%94-oxymoron-or-promising-jvm-feature">Dynamic Constants - oxymoron or promising JVM feature?</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://gotocph.com/2023">GOTO Copenhagen</a>,
+  2023/10/02
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/9hDsylc3Rvc">Video</a></li>
+</ul><p>
+  <a class="extern" href="https://gotocph.com/2023/sessions/2992/java-code-coverage-and-their-best-friend-%E2%80%94-bytecode-scandals-intrigues-investigations">Java, Code Coverage and their best friend - bytecode: scandals, intrigues, investigations</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://gotocph.com/2023">GOTO Copenhagen</a>,
+  2023/10/02
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/SQqam3ARD_k">Video</a></li>
+</ul><h3>DevBcn 2023, Barcelona</h3><p>
+  <a class="extern" href="https://www.devbcn.com/talk/463275">Java, Kotlin, Code Coverage and their best friend - bytecode: scandals, intrigues, investigations</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://www.devbcn.com/">DevBcn</a>,
+  2023/07/03
+</p><h3>Voxxed Days Luxembourg 2023, Luxembourg</h3><p>
+  <a class="extern" href="https://cfp-voxxed-lux.yajug.org/2023/talk/FAW-6156">Java 4..21, Kotlin, Code Coverage and their best friend - bytecode: scandals, intrigues, investigations</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://luxembourg.voxxeddays.com/">Voxxed Days Luxembourg</a>,
+  2023/06/21
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/VMVqy2JJCb4">Video</a></li>
+</ul><h3>Devoxx Poland 2023, Krakow</h3><p>
+  <a class="extern" href="https://devoxx.pl/talk-details/?id=6150">Java 4..21, Kotlin, Code Coverage and their best friend - bytecode: scandals, intrigues, investigations</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://devoxx.pl/">Devoxx Poland</a>,
+  2023/06/02
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/_8jEG3J6fZA">Video</a></li>
+</ul><p>
+  <a class="extern" href="https://devoxx.pl/talk-details/?id=6301">Dynamic Constants - oxymoron or promising JVM feature?</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://devoxx.pl/">Devoxx Poland</a>,
+  2023/06/02
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/ZjgkVGmUPtI">Video</a></li>
+</ul><h3>KotLand 2021, Online</h3><p>
+  <a class="extern" href="https://www.kotland.org/evgeny-mandrikov">New Kotlin compiler backend in 1.5 - new challenges for bytecode analysis tools?</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://www.kotland.org/">KotLand</a>,
+  2021/07/02
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/9BUE6XqPWKA">Video</a></li>
+</ul><h3>Luxoft TechFest 2021, Online</h3><p>
+  <a class="extern" href="https://live.jugru.org/video/?v=Izk5iiM2Mzk5ijE">Scala, Kotlin, Java and Code Coverage: show all that is hidden</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://luxoft-techfest.jugru.org/">Luxoft TechFest</a>,
+  2021/06/03
+</p><ul>
+  <li><a class="extern" href="https://live.jugru.org/video/?v=Izk5iiM2Mzk5ijE">Video</a></li>
+</ul><h3>The Developers' Bakery</h3><p>
+  JaCoCo
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://thebakery.dev/">The Developers' Bakery</a>,
+  2021/03/29
+</p><ul>
+  <li><a class="extern" href="https://thebakery.dev/09/">Podcast</a></li>
+</ul><h3>SnowOne 2021, Online</h3><p>
+  <a class="extern" href="https://snowone.ru/en/speakers/evgeny_mandrikov">Scala, Kotlin, Java and Code Coverage: show all that is hidden</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://snowone.ru/en">SnowOne</a>,
+  2021/02/27
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/EUekFxG5p54">Video</a></li>
+</ul><h3>VirtualKUG 2021, Online</h3><p>
+  <a class="extern" href="https://www.meetup.com/Virtual-Kotlin-User-Group/events/275536290/">Kotlin, Java 4..16, Code Coverage and their best friend - bytecode</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://www.meetup.com/Virtual-Kotlin-User-Group/">VirtualKUG</a>,
+  2021/01/28
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/qSBjas8H38U">Video</a></li>
+</ul><h3>Heisenbug 2020, Online</h3><p>
+  <a class="extern" href="https://heisenbug-moscow.ru/en/2020/msk/talks/4flevnp5xpislct40gsgpq/">Workshop: Code coverage on JVM</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://heisenbug-moscow.ru/">Heisenbug</a>,
+  2020/11/05
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/bqEABS2uPFE">Video (part 1)</a></li>
+  <li><a class="extern" href="https://youtu.be/ujeXJrPhcBw">Video (part 2)</a></li>
+</ul><h3>JPoint 2020, Online</h3><p>
+  <a class="extern" href="https://jpoint.ru/2020/talks/2lhebtxsbx4g9oc2cvhews/">Dynamic Constants - oxymoron or promising JVM feature?</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://www.jpoint.ru/">JPoint</a>,
+  2020/07/02
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/l4maytpu2MU">Video</a></li>
+</ul><h3>SeleniumCamp 2020, Kiev</h3><p>
+  <a class="extern" href="https://seleniumcamp.com/talk/silence-of-code-coverage-time-to-test-the-tests/">Silence of Code Coverage - Time to Test the Tests</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://seleniumcamp.com/">SeleniumCamp</a>,
+  2020/02/22
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/370l_7uf8yY">Video</a></li>
+</ul><h3>JavaDay 2020, Lviv</h3><p>
+  <a class="extern" href="https://www.javaday.org.ua/talks/2020/Dynamic-Constants---oxymoron-or-promising-JVM-feature%3F">Dynamic Constants - oxymoron or promising JVM feature?</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://www.javaday.org.ua/">JavaDay Lviv</a>,
+  2020/02/15
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/5ufVTg86mNI">Video</a></li>
+</ul><h3>RockstarNight Dev Club 2019, Kiev</h3><p>
+  <a class="extern" href="https://www.facebook.com/events/565137857381882/">Code Coverage on JVM: Practice and Mechanics</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://www.rocknightdev.club/">RockstarNight Dev Club</a>,
+  2019/12/24
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/zT7nsvchllI">Video</a></li>
+</ul><h3>Devoxx Ukraine 2019, Kiev</h3><p>
+  <a class="extern" href="https://devoxx.com.ua/talk-details/?id=38353">Code Coverage Mechanics on JVM</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://devoxx.com.ua/">Devoxx Ukraine</a>,
+  2019/11/01
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/cU44Hvy6KQg">Video</a></li>
+</ul><h3>JavaDay 2019, Odesa</h3><p>
+  <a class="extern" href="https://youtu.be/TVoVAfFP3fQ">Deep Dive: Java 4..13, Kotlin, Code Coverage and their best friend - bytecode</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://www.facebook.com/events/impact-hub-odessa/javaday-odesa-deep-dive/328475224494396/">JavaDay Odesa</a>,
+  2019/09/28
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/TVoVAfFP3fQ">Video</a></li>
+</ul><h3>Voxxed Days 2019, Minsk</h3><p>
+  <a class="extern" href="https://voxxeddays.com/minsk/2019/java-4-12-kotlin-code-coverage-and-their-best-friend-bytecode-scandals-intrigues-investigations/">Java 4..12, Kotlin, Code Coverage and their best friend - bytecode</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://voxxeddays.com/minsk/">Voxxed Days Minsk</a>,
+  2019/05/24
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/bIz1niQFDAU?t=23759">Video</a></li>
+</ul><h3>JPoint 2019, Moscow</h3><p>
+  <a class="extern" href="https://jpoint.ru/en/talks/1kdtfe1zh0vtosdldezwap">Let's make some 0xCAFEBABE - test-driven bytecode engineering</a>
+  by Marc R. Hoffman and Evgeny Mandrikov at
+  <a class="extern" href="https://jpoint.ru/">JPoint</a>,
+  2019/04/06
+</p><ul>
+  <li><a class="extern" href="https://assets.ctfassets.net/oxjq45e8ilak/5dc9qBMxfY57CziDAn3qFB/30bc43bfab51f09a940fc7c43f5512e3/Evgeny_Mandrikov_Marc_Hoffmann_Let_s_make_some_0xCAFEBABE_____test-driven_bytecode_engineering.pdf">Presentation</a></li>
+</ul><h3>FOSDEM 2019, Brussels</h3><p>
+  <a class="extern" href="https://fosdem.org/2019/schedule/event/kotlin_code_coverage_bytecode/">Java 4..12, Kotlin, Code Coverage and their best friend - bytecode</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://fosdem.org/">FOSDEM</a>,
+  2019/02/03
+</p><ul>
+  <li><a class="extern" href="https://fosdem.org/2019/schedule/event/kotlin_code_coverage_bytecode/">Video</a></li>
+</ul><h3>Devoxx Ukraine 2018, Kyiv</h3><p>
+  <a class="extern" href="https://dvua18.confinabox.com/talk/YNU-4893/Bytecode_Pattern_Matching">Bytecode Pattern Matching</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://devoxx.org.ua/">Devoxx Ukraine</a>,
+  2018/11/24
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/Os75V_lgEb0">Video</a></li>
+</ul><h3>EclipseCon Europe 2018, Ludwigsburg</h3><p>
+  <a class="extern" href="https://www.eclipsecon.org/europe2018/sessions/bytecode-pattern-matching">Bytecode Pattern Matching</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://www.eclipsecon.org/europe2018/">EclipseCon Europe</a>,
+  2018/10/25
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/48kp3h10brM">Video</a></li>
+</ul><h3>JokerConf 2018, Saint-Petersburg</h3><p>
+  <a class="extern" href="https://2018.jokerconf.com/en/2018/talks/10hiblizhceweosio0y66u/">Java 4..11, Kotlin, Code Coverage and their best friend - bytecode</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://jokerconf.com/">JokerConf</a>,
+  2018/10/19
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/89dSBMxaX_k">Video</a></li>
+</ul><h3>Software Engineering Radio</h3><p>
+  Code Test Coverage Analysis and Tools
+  by Marc R. Hoffmann at
+  <a class="extern" href="http://www.se-radio.net/">Software Engineering Radio</a>,
+  2018/05/22
+</p><ul>
+  <li><a class="extern" href="http://www.se-radio.net/2018/05/se-radio-episode-324-marc-hoffmann-on-code-test-coverage-analysis-and-tools/">Podcast</a></li>
+</ul><h3>Devoxx France 2018, Paris</h3><p>
+  <a class="extern" href="https://cfp.devoxx.fr/2018/talk/DGI-1882/Bytecode_Pattern_Matching">Bytecode Pattern Matching</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="http://devoxx.fr/">Devoxx France</a>,
+  2018/04/20
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/kADLELCH3Mk">Video</a></li>
+</ul><h3>Devoxx France 2018, Paris</h3><p>
+  <a class="extern" href="https://cfp.devoxx.fr/2018/talk/AUN-1366/Java_Code_Coverage_in_Practice">Java Code Coverage in Practice</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="http://devoxx.fr/">Devoxx France</a>,
+  2018/04/18
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/xKRNbQsGavI">Video</a></li>
+</ul><h3>JokerConf 2017, Saint-Petersburg</h3><p>
+  <a class="extern" href="https://jokerconf.com/en/2017/talks/6ghxf0lrm4mwugguokgesy/">Java Code Coverage Mechanics</a>
+  by Evgeny Mandrikov and Marc R. Hoffmann at
+  <a class="extern" href="https://jokerconf.com/">JokerConf</a>,
+  2017/11/04
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/Knb_qpp3dsQ">Video</a></li>
+  <li><a class="extern" href="https://assets.contentful.com/oxjq45e8ilak/5U9sbI4EVyAUawi0G28OoO/a25456aabbcd4c8b0b00f8d1baaf4103/EvgenyMandrikov_Marc_Hoffmann_Java_Coverage_mechanics.pdf">Presentation</a></li>
+</ul><h3>EclipseCon Europe 2017, Ludwigsburg</h3><p>
+  <a class="extern" href="https://www.eclipsecon.org/europe2017/session/java-code-coverage-mechanics">Java Code Coverage Mechanics</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://www.eclipsecon.org/europe2017/">EclipseCon Europe</a>,
+  2017/10/26
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/XG3r9ZBIsnQ">Video</a></li>
+  <li><a class="extern" href="https://www.eclipsecon.org/europe2017/sites/default/files/slides/Java%20Code%20Coverage%20Mechanics%20-%20EclipseCon%20Europe%202017.pdf">Presentation</a></li>
+</ul><h3>EclipseCon France 2017, Toulouse</h3><p>
+  <a class="extern" href="https://www.eclipsecon.org/france2017/session/code-coverage-practice">Code Coverage in Practice</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="https://www.eclipsecon.org/france2017/">EclipseCon France</a>,
+  2017/06/22
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/BoiVrdlxB_M">Video</a></li>
+  <li><a class="extern" href="https://www.eclipsecon.org/france2017/sites/default/files/slides/Code%20Coverage%20in%20Practice%20-%20EclipseCon%20France%202017.pdf">Presentation</a></li>
+</ul><h3>Eclipse Oxygen Webinar Series</h3><p>
+  EclEmma - Code Coverage in Practice
+  by Marc R. Hoffmann,
+  2017/06/20
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/p_mVa9iNmzk">Video</a></li>
+</ul><h3>Geneva JUG 2017, Geneva</h3><p>
+  Java Code Coverage Mechanics
+  by Evgeny Mandrikov at
+  <a class="extern" href="http://genevajug.ch/">Geneva JUG</a>,
+  2017/04/25
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/KnpP-cL4Ky4">Video</a></li>
+  <li><a class="extern" href="http://download.eclipselab.org/jacoco/docs/20170406-Java_Code_Coverage_Mechanics.pdf">Presentation</a></li>
+</ul><h3>Devoxx France 2017, Paris</h3><p>
+  <a class="extern" href="https://cfp.devoxx.fr/2017/talk/BGN-4338/Java_Code_Coverage_Mechanics">Java Code Coverage Mechanics</a>
+  by Evgeny Mandrikov at
+  <a class="extern" href="http://devoxx.fr/">Devoxx France</a>,
+  2017/04/06
+</p><ul>
+  <li><a class="extern" href="https://youtu.be/g8RkNYHJLL0">Video</a></li>
+  <li><a class="extern" href="http://download.eclipselab.org/jacoco/docs/20170406-Java_Code_Coverage_Mechanics.pdf">Presentation</a></li>
+</ul><h3>EclipseCon Europe 2016, Ludwigsburg</h3><p>
+  <a class="extern" href="https://www.eclipsecon.org/europe2016/session/code-coverage-practice">Code Coverage in Practice</a>
+  by Marc R. Hoffmann and Evgeny Mandrikov at
+  <a class="extern" href="https://www.eclipsecon.org/europe2016/">EclipseCon Europe</a>,
+  2016/10/26
+</p><ul>
+  <li><a class="extern" href="https://www.eclipsecon.org/europe2016/sites/default/files/slides/Code%20Coverage%20in%20Practice%20-%20EclipseCon%202016.pdf">Presentation</a></li>
+</ul><h3>EclipseCon 2012, Reston</h3><p>
+  <a class="extern" href="http://www.eclipsecon.org/2012/sessions/code-coverage-revised-eclemma-jacoco">Code Coverage Revised: EclEmma on JaCoCo</a>
+  by Marc R. Hoffmann at
+  <a class="extern" href="http://www.eclipsecon.org/2012/">EclipseCon</a>,
+  2012/03/28
+</p><ul>
+  <li><a class="extern" href="http://download.eclipselab.org/jacoco/docs/20120328-eclemma-on-jacoco.pdf">Presentation</a></li>
+</ul><h3>Eclipse Summit Europe 2010, Ludwigsburg</h3><p>
+  <a class="extern" href="http://www.eclipsecon.org/summiteurope2010/sessions/?page=sessions&amp;id=1745">The Future of Code Coverage Analysis for Eclipse</a>
+  by Marc R. Hoffmann at
+  <a class="extern" href="http://www.eclipsecon.org/summiteurope2010/">Eclipse Summit Europe</a>,
+  2010/11/03
+</p><ul>
+  <li><a class="extern" href="http://download.eclipselab.org/jacoco/docs/20101103-the-future-of-code-coverage.pdf">Presentation</a></li>
+</ul><h3>EclipseCon 2010, Santa Clara</h3><p>
+  <a class="extern" href="http://www.eclipsecon.org/2010/sessions/sessions?id=1275">The Future of Code Coverage Analysis for Eclipse</a>
+  by Marc R. Hoffmann at
+  <a class="extern" href="http://www.eclipsecon.org/2010/">EclipseCon</a>,
+  2010/03/25
+</p><ul>
+  <li><a class="extern" href="http://download.eclipselab.org/jacoco/docs/20100325-the-future-of-code-coverage.pdf">Presentation</a></li>
+</ul><h3>EclipseCon 2008, Santa Clara</h3><p>
+  <a class="extern" href="http://www.eclipsecon.org/2008/?page=sub/&amp;id=19">Tutorial: Code Coverage Analysis for Eclipse</a>
+  by Marc R. Hoffmann and Gilles Iachelini at
+  <a class="extern" href="http://www.eclipsecon.org/2008/">EclipseCon</a>,
+  2008/03/17
+</p><ul>
+  <li><a class="extern" href="https://sourceforge.net/projects/eclemma/files/05_Research/Presentations/EclipseCon2008_CodeCoverageForEclipse.pdf/download">Presentation</a></li>
+</ul><ul>
+  <li><a class="extern" href="https://sourceforge.net/projects/eclemma/files/05_Research/Presentations/EclipseCon2008_CodeCoverageForEclipse_Tutorial.zip/download">Tutorial Data</a></li>
+</ul><h3>Eclipse Summit Europe 2007, Ludwigsburg</h3><p>
+  <a class="extern" href="http://www.eclipsecon.org/summiteurope2007/index.php?page=detail/&amp;id=22">Code Coverage Analysis for Eclipse</a>
+  by Marc R. Hoffmann at
+  <a class="extern" href="http://www.eclipsecon.org/summiteurope2007/">Eclipse Summit Europe</a>,
+  2007/10/10
+</p><ul>
+  <li><a class="extern" href="https://sourceforge.net/projects/eclemma/files/05_Research/Presentations/EclipseSummit2007_CodeCoverageForEclipse.pdf/download">Presentation</a></li>
+</ul><h2>Related Work</h2><p>
+  <a class="extern" href="http://www.webfoot.com/">Kaitlin Duck Sherwood</a>
+  introduces exciting new use cases for code coverage analysis in her paper
+  <i><a class="extern" href="http://www.cs.ubc.ca/cgi-bin/tr/2008/TR-2008-14">Reducing
+  Code Navigation Effort with Differential Code Coverage</a></i>. Based on these
+  ideas EclEmma supports differential code coverage since version 2.1.
+</p>
+</td></tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+<tr>
+  <td class="footer"><a href="../license.html">Copyright</a> © 2006, 2017 Mountainminds GmbH &amp; Co. KG and Contributors</td>
+  <td class="footer" style="text-align:right;">
+    Validate
+    <a href="http://validator.w3.org/check?uri=http://www.eclemma.org/research/index.html">XHTML</a>/<a href="http://jigsaw.w3.org/css-validator/validator?uri=http://www.eclemma.org/research/index.html">CSS</a> ·
+    Last Modified
+    <a href="https://github.com/jacoco/work/blob/98341d0518cc9011e736d55b89129c7825c1a022/content/research/index.html">2025-05-30</a> in Commit
+    <a href="https://github.com/jacoco/work/commit/98341d0518cc9011e736d55b89129c7825c1a022">98341d05</a>
+  </td>
+</tr>
+</table>
+</body>
+</html>
