@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="date" content="2017-03-28 22:12:41 +0200" />
+  <link rel="stylesheet" href="../book.css" type="text/css" />
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+  <title>EclEmma - Architecture</title>
+</head>
+<body>
+<table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+<tr>
+  <td style="padding:5px 10px 5px 10px;font-size:16pt;font-weight:bold;color:#000066;background-color:#f7f7f7;border:1px solid #a5b6c6;">
+    EclEmma <span style="color:#8998a5;">3.1.11</span>
+  </td>
+  <td style="padding:5px 10px 5px 10px;font-size:16pt;font-weight:bold;color:#8998a5;border-bottom:1px solid #a5b6c6;">
+    Java Code Coverage for Eclipse
+  </td>
+  <td style="padding:0px 0px 0px 0px;border-bottom:1px solid #a5b6c6;text-align:right">
+    <a href="https://marketplace.eclipse.org/marketplace-client-intro?mpc_install=264" title="Drag to your running Eclipse workspace to install EclEmma Java Code Coverage">
+      <img src="https://marketplace.eclipse.org/modules/custom/eclipsefdn/eclipsefdn_marketplace/images/btn-install.svg" alt="Drag to your running Eclipse workspace to install EclEmma Java Code Coverage" style="vertical-align:text-bottom; border:0px solid black" />
+    </a>
+  </td>
+</tr>
+<tr><td style="vertical-align:top;padding:20px 10px 20px 10px;background-color:#f7f7f7;border-left:1px solid #a5b6c6;border-right:1px solid #a5b6c6;border-bottom:1px solid #a5b6c6;">
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../index.html">Overview</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="../installation.html">Installation</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="../userdoc/index.html">User Guide</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="../support.html">Support</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../resources.html">Resources</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="index.html">Developer Information</a> 
+    </div>
+    <div class="menuhi" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="architecture.html">Architecture</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="eclemma20.html">EclEmma 2.0</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="checklist.html">Release Checklist</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="../research/index.html">Research</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../jacoco/index.html">JaCoCo</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../changes.html">Change Log</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../license.html">License</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../contact.html">Contact</a> 
+    </div>
+  <div class="menu" style="margin-top:15pt;background-image:url(../images/extern.gif)">
+    <a href="https://github.com/jacoco">GitHub Home</a>
+  </div>
+  <div style="text-align:center;margin-top:0pt;">
+    <a href="http://www.eclipse.org/org/press-release/20080318_AwardsWinners.php"><img src="../images/award.jpg" width="144" height="120" alt="Eclipse Community Award 2008" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt;">
+    <a href="http://www.jacoco.org/jacoco"><img src="../images/jacoco.png" height="62" width="140" alt="JaCoCo" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt;">
+    <a href="http://www.sonarqube.org/"><img src="../images/sonarqube.png" height="40" width="140" alt="Inspected with sonarqube" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt;padding-top:15px;border-top:1px solid #a0a0a0">
+    <a href="https://www.mtrail.ch/en/career.html"><img src="../images/mtrail.png" width="140" height="200" alt="jobs at mtrail" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt">
+    <a href="http://www.javaspecialists.eu/"><img src="../images/tjsn.jpg" width="140" height="140" alt="The Java Specialists' Newsletter" style="border:0px solid black" /></a>
+  </div>
+</td><td style="vertical-align:top;padding:0px 0px 5px 20px;width:90%;border-bottom:1px solid #a5b6c6;" colspan="2">
+<h2>Architecture</h2><p>
+  Design decisions for the EclEmma plug-in should be based on the following
+  guidelines:
+</p><ul>
+  <li>A high usability should allow developers to efficiently analyse coverage
+  results and improve test coverage interactively. Technically motivated extra
+  steps must be avoided.</li>
+  <li>Seamless integration into the Eclipse workbench: Use existing tools and
+  paradigms; adopt the Eclipse look &amp; feel.</li>
+  <li>The primary focus are local launches and interactive coverage analysis
+  within the Eclipse workbench. For automated builds and report generation
+  JaCoCo's various <a href="http://www.jacoco.org/jacoco/trunk/doc/integrations.html">integrations</a>
+  with build tools like Ant and Maven are the better choice.</li>
+  <li>No project modification: Coverage analysis is a way to look at your
+  projects, but it is not an inherent part of your projects. Therefore a coverage
+  tool should work without touching your project's source tree or configuration.</li>
+  <li>Extensibility: Allow other developers to extend EclEmma's functionality
+  or build new features using the services provided by EclEmma.</li>
+  <li>And finally: Keep it simple!</li>
+</ul><p>
+  The following sections provide a high level overview about EclEmma's key
+  implementation strategies.
+</p><h3>Separate Backend from GUI</h3><p>
+  EclEmma is packaged in two plug-ins: The core plug-in offers all functionality
+  for launching and analysis. It has no dependencies on the Eclipse UI and all
+  functionality can also be used in <i>headless</i> mode. The JUnit tests for
+  the core plug-in run <i>headless</i>. The UI plug-in provides the workbench
+  integration and relies on the core's public API only. This approach also
+  verifies the usability of the core API.
+</p><h3>JaCoCo Execution Data Files</h3><p>
+  To avoid modifying projects all data files are stored in the plug-in's state
+  location.
+</p><h3>Launching in Coverage Mode</h3><p>
+  Instead of re-implementing launcher for the different launch types, the
+  existing launchers for the <i>Run</i> mode are used with adjusted launch
+  configurations. The coverage launchers perform these steps:
+</p><ol>
+  <li>Create a temporary working copy of the launch configuration and adjust the
+  VM arguments to add the JaCoCo agent to the Java VM.</li>
+  <li>Delegate to the launcher for <i>Run</i> mode of the same launch type.</li>
+</ol><h3>Coverage Session</h3><p>
+  A coverage session (<code>com.mountainminds.eclemma.core.ICoverageSession</code>)
+  is the result of a coverage run (or multiple merged runs) or coverage data
+  imported from an external source. It is an immutable container for all data
+  necessary to
+</p><ul>
+  <li>provide coverage highlighting in Java editors,</li>
+  <li>populate the <i>Coverage</i> view and</li>
+  <li>export coverage reports in different formats.</li>
+</ul><p>
+  Whenever a coverage launch terminates a coverage session is automatically
+  created. While there can be a list of coverage sessions, at most one session
+  can be the <i>active session</i> which is used to provide coverage summaries
+  for Java elements and source code highlighting.
+</p><h3>Coverage Analysis</h3><p>
+  As soon as a coverage session becomes active the corresponding execution data
+  is processed and analyzed against the classes in the workspace. Coverage
+  information is described by a <code>org.jacoco.core.analysis.ICoverageNode</code>
+  instances for each Java model element (see <code>org.eclipse.jdt.core</code>
+  package). An adapter factory allows obtaining the corresponding
+  <code>ICoverageNode</code> instances for a particular Java model element via
+  <code>IJavaElement.getAdapter()</code>.
+</p><h3>Editor Highlighting</h3><p>
+  The EclEmma UI plug-in tracks the currently opened Java editors and
+  piggybacks a specialized annotation model to the editors' annotation model.
+</p>
+</td></tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+<tr>
+  <td class="footer"><a href="../license.html">Copyright</a> © 2006, 2017 Mountainminds GmbH &amp; Co. KG and Contributors</td>
+  <td class="footer" style="text-align:right;">
+    Validate
+    <a href="http://validator.w3.org/check?uri=http://www.eclemma.org/devdoc/architecture.html">XHTML</a>/<a href="http://jigsaw.w3.org/css-validator/validator?uri=http://www.eclemma.org/devdoc/architecture.html">CSS</a> ·
+    Last Modified
+    <a href="https://github.com/jacoco/work/blob/1ce487ba21186cba5d9a6195c273ae5557ec6e50/content/devdoc/architecture.html">2017-03-28</a> in Commit
+    <a href="https://github.com/jacoco/work/commit/1ce487ba21186cba5d9a6195c273ae5557ec6e50">1ce487ba</a>
+  </td>
+</tr>
+</table>
+</body>
+</html>
