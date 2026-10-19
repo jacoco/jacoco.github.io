@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="date" content="2017-06-13 22:24:59 +0200" />
+  <link rel="stylesheet" href="../book.css" type="text/css" />
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+  <title>EclEmma - Using the Coverage View</title>
+</head>
+<body>
+<table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+<tr>
+  <td style="padding:5px 10px 5px 10px;font-size:16pt;font-weight:bold;color:#000066;background-color:#f7f7f7;border:1px solid #a5b6c6;">
+    EclEmma <span style="color:#8998a5;">3.1.11</span>
+  </td>
+  <td style="padding:5px 10px 5px 10px;font-size:16pt;font-weight:bold;color:#8998a5;border-bottom:1px solid #a5b6c6;">
+    Java Code Coverage for Eclipse
+  </td>
+  <td style="padding:0px 0px 0px 0px;border-bottom:1px solid #a5b6c6;text-align:right">
+    <a href="https://marketplace.eclipse.org/marketplace-client-intro?mpc_install=264" title="Drag to your running Eclipse workspace to install EclEmma Java Code Coverage">
+      <img src="https://marketplace.eclipse.org/modules/custom/eclipsefdn/eclipsefdn_marketplace/images/btn-install.svg" alt="Drag to your running Eclipse workspace to install EclEmma Java Code Coverage" style="vertical-align:text-bottom; border:0px solid black" />
+    </a>
+  </td>
+</tr>
+<tr><td style="vertical-align:top;padding:20px 10px 20px 10px;background-color:#f7f7f7;border-left:1px solid #a5b6c6;border-right:1px solid #a5b6c6;border-bottom:1px solid #a5b6c6;">
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../index.html">Overview</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="../installation.html">Installation</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="index.html">User Guide</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="launching.html">Launching in Coverage Mode</a> 
+    </div>
+    <div class="menuhi" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="coverageview.html">Using the Coverage View</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="annotations.html">Source Code Annotations</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="coverageproperties.html">Coverage Properties</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="decorators.html">Decorators</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="sessions.html">Managing Coverage Sessions</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="importexport.html">Session Import and Export</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="keyboard.html">Keyboard Usage</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:16px;">
+      <a href="preferences.html">Preferences</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="../support.html">Support</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../resources.html">Resources</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="../devdoc/index.html">Developer Information</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/container.gif);margin-left:0px;">
+      <a href="../research/index.html">Research</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../jacoco/index.html">JaCoCo</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../changes.html">Change Log</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../license.html">License</a> 
+    </div>
+    <div class="menu" style="background-image:url(../images/topic.gif);margin-left:0px;">
+      <a href="../contact.html">Contact</a> 
+    </div>
+  <div class="menu" style="margin-top:15pt;background-image:url(../images/extern.gif)">
+    <a href="https://github.com/jacoco">GitHub Home</a>
+  </div>
+  <div style="text-align:center;margin-top:0pt;">
+    <a href="http://www.eclipse.org/org/press-release/20080318_AwardsWinners.php"><img src="../images/award.jpg" width="144" height="120" alt="Eclipse Community Award 2008" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt;">
+    <a href="http://www.jacoco.org/jacoco"><img src="../images/jacoco.png" height="62" width="140" alt="JaCoCo" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt;">
+    <a href="http://www.sonarqube.org/"><img src="../images/sonarqube.png" height="40" width="140" alt="Inspected with sonarqube" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt;padding-top:15px;border-top:1px solid #a0a0a0">
+    <a href="https://www.mtrail.ch/en/career.html"><img src="../images/mtrail.png" width="140" height="200" alt="jobs at mtrail" style="border:0px solid black" /></a>
+  </div>
+  <div style="text-align:center;margin-top:10pt">
+    <a href="http://www.javaspecialists.eu/"><img src="../images/tjsn.jpg" width="140" height="140" alt="The Java Specialists' Newsletter" style="border:0px solid black" /></a>
+  </div>
+</td><td style="vertical-align:top;padding:0px 0px 5px 20px;width:90%;border-bottom:1px solid #a5b6c6;" colspan="2">
+<h2>Using the Coverage View</h2><p>
+  The <i>Coverage</i> view automatically appears when a new
+  <a href="sessions.html">coverage session</a> is
+  added or can manually opened from the <em>Window → Show View</em> menu
+  in the <em>Java</em> category. It shows coverage summaries for the active
+  session.
+</p><p>
+  <img src="images/coverageview.png" alt="Coverage View" />
+</p><p>
+  The <i>Coverage</i> view shows all analyzed Java elements within the common
+  Java hierarchy. Individual columns contain the following numbers for the
+  active session, always summarizing the child elements of the respective Java
+  element:
+</p><ul>
+  <li>Coverage ratio</li>
+  <li>Items covered</li>
+  <li>Items not covered</li>
+  <li>Total items</li>
+</ul><p>
+  The elements may be sorted in ascending or descending order by clicking the
+  respective column header. Double-clicking an element opens its declaration in
+  an editor with <a href="annotations.html">highlighted</a> source code. You can
+  select between different metrics, see last section for details.
+</p><h3>Toolbar and Drop-Down Menu</h3><p>
+  <img src="images/coverageviewtools.png" alt="Coverage View Tools" />
+</p><p>
+  The coverage view's toolbar offers the following actions:
+</p><ul>
+  <li><b>Coverage Last Launched</b>: Re-run the currently selected coverage
+  session.</li>
+  <li><b>Dump Execution Data</b>: Dump execution data from a running process and
+  create a new session from the data. Only active when at least one process is
+  running in <i>Coverage</i> mode.</li>
+  <li><b>Remove Active Session</b>: Remove the currently selected coverage
+  session.</li>
+  <li><b>Remove All Sessions</b>: Remove all coverage sessions.</li>
+  <li><b>Merge Sessions</b>: Merges multiple sessions into a single one.</li>
+  <li><b>Select Session</b>: Select <a href="sessions.html">session</a> from the
+  drop down-menu and make it the active session.</li>
+  <li><b>Collapse All</b>: Collapse all expanded tree nodes.</li>
+  <li><b>Link with Current Selection</b>: If this toggle is checked the coverage
+  view automatically reveals the Java element currently selected in other views
+  or editors.</li>
+</ul><p>
+  Some of the actions are deactivated if there is no session or only a single
+  session. More settings are available form the coverage view's drop-down menu:
+</p><p>
+  <img src="images/coverageviewmenu.png" alt="Coverage View Drop-Down Menu" />
+</p><ul>
+  <li><b>Show Elements</b>: Select Java elements shown as root entries
+  in the coverage tree: Projects, package fragment roots (source folders or
+  libraries), package fragments or types.</li>
+  <li><b>Counter Mode</b>: Different counter modes can be selected from the
+  view's drop-down menu: bytecode instructions, branches, lines, methods,
+  types and cyclomatic complexity. Please see
+  <a class="extern" href="http://www.jacoco.org/jacoco/trunk/doc/counters.html">JaCoCo documentation</a>
+  for detailed counter definitions.</li>
+  <li><b>Hide Unused Elements</b>: Filter all elements from the coverage view
+  that have not been executed at all during the coverage session.</li>
+</ul><h3>Filtering</h3><p>
+  If you're working on a particular unit you can filter out all classes which
+  have not been loaded during the test run. This filtering can be enabled with
+  the <i>Hide Unused Types</i> menu entry in the <i>Coverage</i> view's
+  drop-down menu.
+</p><p>
+  <b>Tip:</b> Combine the <i>Hide Unused Types</i> option with types as root
+  entries. This will give you a plain list of all classes loaded for your test
+  case.
+</p>
+</td></tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+<tr>
+  <td class="footer"><a href="../license.html">Copyright</a> © 2006, 2017 Mountainminds GmbH &amp; Co. KG and Contributors</td>
+  <td class="footer" style="text-align:right;">
+    Validate
+    <a href="http://validator.w3.org/check?uri=http://www.eclemma.org/userdoc/coverageview.html">XHTML</a>/<a href="http://jigsaw.w3.org/css-validator/validator?uri=http://www.eclemma.org/userdoc/coverageview.html">CSS</a> ·
+    Last Modified
+    <a href="https://github.com/jacoco/eclemma/blob/4b213d2a7d26640ee877be662b91d662bdcb074e/org.eclipse.eclemma.doc/pages/coverageview.html">2017-06-13</a> in Commit
+    <a href="https://github.com/jacoco/eclemma/commit/4b213d2a7d26640ee877be662b91d662bdcb074e">4b213d2a</a>
+  </td>
+</tr>
+</table>
+</body>
+</html>
